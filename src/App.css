@@ -1,0 +1,37 @@
+.App {
+  display: flex;
+  height: 100vh;
+  text-align: center;
+  background-color: #11151c;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+span {
+  display: block;
+  font-family: nomospace;
+  white-space: nowrap;
+  border-radius: 4px solid;
+  width: 12ch;
+  color: #fff;
+  font-size: 4rem;
+  animation: typing 2s steps(12), blink 0.5s infinite step-end alternate;
+  overflow: hidden;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
