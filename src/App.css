@@ -1,11 +1,21 @@
 .App {
   display: flex;
   height: 100vh;
-  text-align: center;
-  background-color: #11151c;
+  text-align: left center;
+  background-color: #ffffff;
+  background-image: url(./assets/img/landing.jpeg);
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 50% 50%;
 }
 
 .container {
+  width: 50%;
+  display: flex;
+  justify-content: left center;
+  align-items: center;
+}
+.containerCenter {
   width: 100%;
   display: flex;
   justify-content: center;
