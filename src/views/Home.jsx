@@ -1,53 +1,92 @@
 import "../styles/Home.css";
 import React from "react";
-import {
-  Box,
-  Container,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Typography,
-  CssBaseline,
-  Tooltip,
-  Button,
-  Stack
-} from "@mui/material";
-import { positions } from "@mui/system";
-import landing from "../assets/img/landing.jpeg";
-import { ExpandMoreIcon } from "@mui/icons-material";
+import { Container, Typography, Button, Stack, Grid } from "@mui/material";
+
 import { NavLink } from "react-router-dom";
+
 const Home = () => {
   return (
-    <div className="App">
-      <React.Fragment>
-        <CssBaseline />
-        <div className="container-fluid d-flex align-items-center">
-          <div className="d-flex flex-column justify-content-center align-items-start w-50">
-            <h2>Universidad de Concepción</h2>
-            <h1>Toxicología de la alimentación</h1>
-            <h3>
-              Conocer la toxicidad que contienen los alimentos que consumes puede resultar en una
-              práctica positiva
-            </h3>
-            <div className="containerCenter">
-              <Stack direction="row" spacing={2}>
-                <NavLink
-                  to="calculator"
-                >
-                  <Button variant="outlined" color="warning">
-                    Calculadora
-                  </Button>
-                </NavLink>
+    <Container maxWidth="false" className="overflow-hidden p-0">
+      <Grid container spacing={2} className="vh-100 d-flex align-items-center">
+        <Grid xs={6}>
+          <Container maxWidth="xs" style={{ marginStart: "100px" }}>
+            <div className="d-flex flex-column justify-content-center align-items-start w-100">
+              <Typography variant="h6" align="center" gutterBottom className="semibold">
+                UNIVERSIDAD DE CONCEPCIÓN
+              </Typography>
+              <p></p>
+              <Typography variant="h3" align="justify" gutterBottom className="semibold">
+                Toxicología de la alimentación
+              </Typography>
+              <p></p>
+              <Typography variant="h6" align="justify" gutterBottom className="semibold">
+                Conocer la toxicidad que contienen los alimentos que consumes puede resultar en una
+                práctica positiva.
+              </Typography>
+              <p></p>
 
-                <Button variant="contained" color="warning">
-                  Administrador
-                </Button>
-              </Stack>
+              <div className="containerCenter">
+                <Stack direction="row" spacing={2}>
+                  <NavLink to="calculator">
+                    <Button variant="outlined" color="primary">
+                      Calculadora
+                    </Button>
+                  </NavLink>
+
+                  <Button variant="contained" color="primary">
+                    Administrador
+                  </Button>
+                </Stack>
+              </div>
             </div>
-          </div>
-        </div>
-      </React.Fragment>
-    </div>
+          </Container>
+        </Grid>
+        <Grid xs={6}>
+          <Container
+            className="p-0 d-flex justify-content-center align-items-center"
+            style={{
+              height: "70vh",
+              borderRadius: "250px 0px 0px 250px",
+              backgroundColor: "#d9d9d9",
+              backgroundImage: "url(/img/landing.jpeg)",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "105vh",
+              backgroundPosition: "left center",
+            }}
+          ></Container>
+        </Grid>
+      </Grid>
+      <Container maxWidth="false" className="vh-30 overflow-hidden p-0">
+        <Grid xs={6}>
+          <Container
+            className="p-0 d-flex justify-content-center align-items-center"
+            style={{
+              height: "30vh",
+              backgroundColor: "#FF724A",
+              backgroundImage: " url(/img/figuras.png)",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center",
+              backgroundSize: "170vh",
+            }}
+          >
+            <div style={{ height: "10vh", width: "50vh" }}>
+              <Typography
+                variant="h4"
+                align="center"
+                gutterBottom
+                className="semibold"
+                color="secondary.light"
+              >
+                ¿Deseas saber más?
+              </Typography>
+              <Button variant="outlined" color="secondary">
+                Haz click aquí
+              </Button>
+            </div>
+          </Container>
+        </Grid>
+      </Container>
+    </Container>
   );
 };
 export default Home;
