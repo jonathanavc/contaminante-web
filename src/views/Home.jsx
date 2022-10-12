@@ -27,7 +27,7 @@ const Home = () => {
 
               <div className="containerCenter">
                 <Stack direction="row" spacing={2}>
-                  <NavLink to="calculator">
+                  <NavLink to="calculator" style={{ textDecoration: "none" }}>
                     <Button variant="outlined" color="primary">
                       Calculadora
                     </Button>
@@ -66,7 +66,7 @@ const Home = () => {
               backgroundImage: " url(/img/figuras.png)",
               backgroundRepeat: "no-repeat",
               backgroundPosition: "center",
-              backgroundSize: "170vh",
+              backgroundSize: "120vh",
             }}
           >
             <div style={{ height: "10vh", width: "50vh" }}>
@@ -79,9 +79,13 @@ const Home = () => {
               >
                 ¿Deseas saber más?
               </Typography>
-              <Button variant="outlined" color="secondary">
-                Haz click aquí
-              </Button>
+              <div className="containerCenter">
+                <Stack direction="row" spacing={2}>
+                  <Button variant="outlined" color="secondary">
+                    Haz click aquí
+                  </Button>
+                </Stack>
+              </div>
             </div>
           </Container>
         </Grid>
