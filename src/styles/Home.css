@@ -10,13 +10,11 @@
 }
 
 .container {
-  width: 50% !;
   display: flex !;
   justify-content: left center !important;
   align-items: center !important;
 }
 .containerCenter {
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -14,5 +14,8 @@ export const ThemeApp = createTheme({
             dark: '#a8a8a8',
             contrastText: '#000',
         },
+        white: {
+            main: '#ffff'
+        }
     },
 });
