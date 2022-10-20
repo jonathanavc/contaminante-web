@@ -1,7 +1,7 @@
 import "../styles/Home.css";
 import React from "react";
-import { Container, Typography, Button, Stack } from "@mui/material";
-import Grid from "@mui/material/Unstable_Grid2";
+import { Container, Typography, Button, Stack, Grid } from "@mui/material";
+
 import { NavLink } from "react-router-dom";
 
 const Home = () => {
@@ -32,11 +32,10 @@ const Home = () => {
                       Calculadora
                     </Button>
                   </NavLink>
-                  <NavLink to="login" style={{ textDecoration: "none" }}>
-                    <Button variant="contained" color="primary">
-                      Administrador
-                    </Button>
-                  </NavLink>
+
+                  <Button variant="contained" color="primary">
+                    Administrador
+                  </Button>
                 </Stack>
               </div>
             </div>
@@ -57,9 +56,7 @@ const Home = () => {
           ></Container>
         </Grid>
       </Grid>
-      <Container
-        maxWidth="false"
-        className="vh-30 p-0 m-0 d-flex justify-content-center align-items-center"
+      <Container maxWidth="false" className="vh-30 p-0 m-0 d-flex justify-content-center align-items-center"
         style={{
           height: "30vh",
           backgroundColor: "#FF724A",
@@ -67,7 +64,7 @@ const Home = () => {
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
           backgroundSize: "cover",
-          width: "100%",
+          width: "100%"
         }}
       >
         <div style={{ height: "10vh", width: "100vh" }}>
@@ -82,11 +79,9 @@ const Home = () => {
           </Typography>
           <div className="containerCenter">
             <Stack direction="row" spacing={2}>
-              <NavLink to="info" style={{ textDecoration: "none" }}>
-                <Button variant="outlined" color="white">
-                  Haz click aquí
-                </Button>
-              </NavLink>
+              <Button variant="outlined" color="white">
+                Haz click aquí
+              </Button>
             </Stack>
           </div>
         </div>
