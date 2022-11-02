@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { getFoods } from "../api/APIUtils.js";
 import Grid from "@mui/material/Unstable_Grid2";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
@@ -12,6 +11,9 @@ import axios from "axios";
 import warningImg from "../img/warning.png";
 import greatImg from "../img/great.png";
 import CircularProgress from '@mui/material/CircularProgress';
+import backArrow from "../img/back.png";
+import { Link } from "react-router-dom";
+import './../css/calculator.css';
 
 // eslint-disable-next-line react/prop-types
 const Result = ({ textResult, subtitleResult, imgSource }) => {
@@ -39,10 +41,30 @@ const calculator = () => {
     { id: 6, label: "Pan6" },
     { id: 7, label: "Pan7" }
   ]);
+  let firstTime = false
   const [componentResult, setComponentResult] = useState(false);
   const [valueResult, setValueResult] = useState("");
+  const [weight, setWeight] = useState(null);
+  const [amount, setAmount] = useState(null);
+  const [food, setFood] = useState("")
+  const [validateWeight, setValidateWeight] = useState(false)
+  const [validateAmount, setValidateAmount] = useState(false)
+  const [validateFood, setValidateFood] = useState(false)
+  let validation = false
+
+  function getDataFoods() {
+    return axios('http://127.0.0.1:5000/request_alimentos')
+      .then((response) => setFoods(response.data))
+  }
+
+
+
 
   useEffect(() => {
+    if (!firstTime) {
+      const data = getDataFoods()
+      firstTime = true
+    }
     if (!complete) {
       setComponentResult(
         <Typography className="fw-bold" variant="subtitle2" gutterBottom color="secondary.dark">
@@ -68,31 +90,46 @@ const calculator = () => {
     }
   }, [complete]);
 
+  const validateFields = function () {
+    if (weight === null) setValidateWeight(true)
+    if (food === "") setValidateFood(true)
+    if (amount === null) setValidateAmount(true)
+    return weight === null || food === "" || amount === null
+
+  }
+
   const calculateContamination = function () {
+    if (validateFields()) return
     console.log("CALCULANDO...");
 
     setComponentResult(<CircularProgress />)
-    setTimeout(() => {
-      setComplete(true);
-      setValueResult("Contaminado");
-    }, 2000)
+    setComplete(false);
+    axios
+      .post("http://127.0.0.1:5000/calculadora", { weight: weight, amount: amount, food: food })
+      .then(function (response) {
+        // handle success
+        console.log(response.data);
+        setComplete(true);
+        response.data === "Dañino para la salud" ? setValueResult("Contaminado") : setValueResult("No Contaminado");
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
 
-    // axios
-    //   .get("https://rickandmortyapi.com/api/character")
-    //   .then(function (response) {
-    //     // handle success
-    //     console.log(response.data.results);
-    //     return response.data.results;
-    //   })
-    //   .catch(function (error) {
-    //     // handle error
-    //     console.log(error);
-    //   });
   };
 
   return (
     <Container maxWidth="false" className="vh-100 overflow-hidden p-0">
-      <Grid container spacing={2} className="vh-100 d-flex align-items-center">
+      <Container maxWidth="xl" className="my-5 px-2">
+        <Link to="/">
+          <img href="/" src={backArrow} className="img-fluid img-arrow" style={{ width: "40px", height: "40px" }}></img>
+        </Link>
+
+
+
+      </Container>
+      <Grid container spacing={2} className="vh-100 d-flex">
         <Grid xs={6}>
           <Container maxWidth="xs" style={{ marginStart: "100px" }}>
             <Typography variant="h4" align="center" gutterBottom className="fw-semibold">
@@ -124,11 +161,16 @@ const calculator = () => {
                   fullWidth
                   type="number"
                   variant="filled"
+                  error={validateWeight}
                   hiddenLabel
+                  onChange={(evento) => {
+                    setWeight(evento.target.value !== "" ? parseFloat(evento.target.value) : null)
+                    setValidateWeight(false)
+                  }}
                   InputProps={{
                     startAdornment: <InputAdornment position="start">kg</InputAdornment>
                   }}
-                  helperText="Some important text"
+                  helperText=""
                 />
               </Container>
               <Container className="d-flex flex-column gap-3">
@@ -156,13 +198,18 @@ const calculator = () => {
                   id="combo-box-demo"
                   options={foods}
                   fullWidth
+                  onChange={(evento) => {
+                    setFood(evento.target.textContent)
+                    setValidateFood(false)
+                  }}
                   renderInput={params => (
                     <TextField
                       fullWidth
                       {...params}
                       label="Alimentos"
                       variant="filled"
-                      helperText="Some important text"
+                      error={validateFood}
+                      helperText=""
                     />
                   )}
                 />
@@ -193,8 +240,13 @@ const calculator = () => {
                   type="number"
                   variant="filled"
                   hiddenLabel
+                  error={validateAmount}
                   InputProps={{
                     startAdornment: <InputAdornment position="start">g/día</InputAdornment>
+                  }}
+                  onChange={(evento) => {
+                    setAmount(evento.target.value !== "" ? parseFloat(evento.target.value) : null)
+                    setValidateAmount(false)
                   }}
                   helperText="Some important text"
                 />

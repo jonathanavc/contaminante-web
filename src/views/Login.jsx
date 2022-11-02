@@ -12,11 +12,10 @@ import {
   OutlinedInput,
   IconButton,
   Input,
-  Link,
 } from "@mui/material";
 import { AccountCircle, Visibility, VisibilityOff } from "@mui/icons-material/";
 import Grid from "@mui/material/Unstable_Grid2";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 const Login = () => {
   const [values, setValues] = React.useState({
@@ -126,19 +125,19 @@ const Login = () => {
                 />
               </FormControl>
               <div className="d-flex flex-column  align-items-end">
-                <Link href="#" underline="none" color={"primary.dark"}>
+                <NavLink href="#" underline="none" color={"primary.dark"}>
                   {"¿Ha olvidado su contraseña?"}
-                </Link>
+                </NavLink>
               </div>
             </Stack>
             <p></p>
             <Stack spacing={3}>
               <div className="d-flex flex-column  align-items-center">
-                <NavLink to="" style={{ textDecoration: "none" }}>
+                <Link to="/reportBuilder">
                   <Button variant="contained" color="primary">
                     Iniciar sesión
                   </Button>
-                </NavLink>
+                </Link>
               </div>
               <div className="d-flex flex-column  align-items-center">
                 <NavLink to="" style={{ textDecoration: "none" }}>
