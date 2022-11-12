@@ -1,4 +1,4 @@
-<h1 align="center">React Template</h1>
+<h1 align="center">Contaminantes WEB</h1>
 <p align="center">Template para el desarrollo de proyectos en React.</p>
 
 <h2>Acerca del Proyecto</h2>
