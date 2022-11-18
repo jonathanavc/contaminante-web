@@ -121,7 +121,7 @@ const calculator = () => {
 
   return (
     <Container maxWidth="false" className="vh-100 overflow-hidden p-0">
-      <Container maxWidth="xl" className="my-5 px-2">
+      <Container maxWidth="xl" className="my-5 m-0 px-5">
         <Link to="/">
           <img href="/" src={backArrow} className="img-fluid img-arrow" style={{ width: "40px", height: "40px" }}></img>
         </Link>
@@ -248,7 +248,6 @@ const calculator = () => {
                     setAmount(evento.target.value !== "" ? parseFloat(evento.target.value) : null)
                     setValidateAmount(false)
                   }}
-                  helperText="Some important text"
                 />
               </Container>
               <Button
