@@ -15,31 +15,29 @@ import backArrow from "../img/back.png";
 import Chip from "@mui/material/Chip";
 import FemaleIcon from "@mui/icons-material/Female";
 import MaleIcon from "@mui/icons-material/Male";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
 import { Link } from "react-router-dom";
-import SearchIcon from '@mui/icons-material/Search';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Slider from '@mui/material/Slider';
-
-
-
+import SearchIcon from "@mui/icons-material/Search";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Slider from "@mui/material/Slider";
+import { withAuthenticationRequired } from "@auth0/auth0-react";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const ReportBuilder = () => {
-
   function valuetext(value) {
     return `${value}KG`;
   }
 
   const [expanded, setExpanded] = useState(false);
 
-  const handleChangeAccordion = (panel) => (event, isExpanded) => {
+  const handleChangeAccordion = panel => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
@@ -90,7 +88,12 @@ const ReportBuilder = () => {
     <Container maxWidth="xxl" className="overflow-hidden p-0">
       <Container maxWidth="false" className="my-5 m-0 px-5">
         <Link to="/dashboardAdmin">
-          <img href="/" src={backArrow} className="img-fluid img-arrow" style={{ width: "40px", height: "40px" }}></img>
+          <img
+            href="/"
+            src={backArrow}
+            className="img-fluid img-arrow"
+            style={{ width: "40px", height: "40px" }}
+          ></img>
         </Link>
       </Container>
 
@@ -100,7 +103,7 @@ const ReportBuilder = () => {
             <Typography variant="h4" className="fw-bold mb-3">
               Generador de reportes
             </Typography>
-            <Accordion expanded={expanded === 'panel1'} onChange={handleChangeAccordion('panel1')}>
+            <Accordion expanded={expanded === "panel1"} onChange={handleChangeAccordion("panel1")}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1a-content"
@@ -131,11 +134,12 @@ const ReportBuilder = () => {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {rowsContaminantes.map((row) => (
+                      {rowsContaminantes.map(row => (
                         <TableRow
-                          hover role="checkbox"
+                          hover
+                          role="checkbox"
                           key={row.id}
-                          sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                         >
                           <TableCell component="th" scope="row">
                             {row.id}
@@ -149,7 +153,7 @@ const ReportBuilder = () => {
                 </TableContainer>
               </AccordionDetails>
             </Accordion>
-            <Accordion expanded={expanded === 'panel2'} onChange={handleChangeAccordion('panel2')}>
+            <Accordion expanded={expanded === "panel2"} onChange={handleChangeAccordion("panel2")}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel2a-content"
@@ -180,11 +184,12 @@ const ReportBuilder = () => {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {rowsFoods.map((row) => (
+                      {rowsFoods.map(row => (
                         <TableRow
-                          hover role="checkbox"
+                          hover
+                          role="checkbox"
                           key={row.id}
-                          sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                         >
                           <TableCell component="th" scope="row">
                             {row.id}
@@ -198,7 +203,7 @@ const ReportBuilder = () => {
                 </TableContainer>
               </AccordionDetails>
             </Accordion>
-            <Accordion expanded={expanded === 'panel3'} onChange={handleChangeAccordion('panel3')}>
+            <Accordion expanded={expanded === "panel3"} onChange={handleChangeAccordion("panel3")}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel3a-content"
@@ -218,7 +223,7 @@ const ReportBuilder = () => {
                   <div>
                     <Typography className="mb-2">Rango de edad (Años)</Typography>
                     <Slider
-                      getAriaLabel={() => 'Temperature range'}
+                      getAriaLabel={() => "Temperature range"}
                       value={valueSliderAge}
                       onChange={handleChangeSliderAge}
                       valueLabelDisplay="auto"
@@ -228,14 +233,13 @@ const ReportBuilder = () => {
                   <div>
                     <Typography className="mb-2">Rango de peso (KG)</Typography>
                     <Slider
-                      getAriaLabel={() => 'Temperature range'}
+                      getAriaLabel={() => "Temperature range"}
                       value={valueSliderWeight}
                       onChange={handleChangeSliderWeight}
                       valueLabelDisplay="auto"
                       getAriaValueText={valuetext}
                     />
                   </div>
-
                 </Stack>
               </AccordionDetails>
             </Accordion>
@@ -291,8 +295,15 @@ const ReportBuilder = () => {
           </Container>
         </Grid>
       </Grid>
-    </Container >
+    </Container>
   );
 };
 
-export default ReportBuilder;
+export default withAuthenticationRequired(ReportBuilder, {
+  onRedirecting: () => (
+    <div className="position-absolute top-50 start-50 translate-middle">
+      {" "}
+      <CircularProgress />
+    </div>
+  ),
+});
