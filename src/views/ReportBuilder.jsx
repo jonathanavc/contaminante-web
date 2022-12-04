@@ -88,9 +88,9 @@ const ReportBuilder = () => {
   ];
   return (
     <Container maxWidth="xxl" className="overflow-hidden p-0">
-      <Container maxWidth="xl" className="my-5 px-2">
-        <Link to="/">
-          <img src={backArrow} className="img-fluid img-arrow" style={{ width: "40px", height: "40px" }}></img>
+      <Container maxWidth="false" className="my-5 m-0 px-5">
+        <Link to="/dashboardAdmin">
+          <img href="/" src={backArrow} className="img-fluid img-arrow" style={{ width: "40px", height: "40px" }}></img>
         </Link>
       </Container>
 
