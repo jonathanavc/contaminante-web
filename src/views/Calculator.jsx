@@ -59,7 +59,7 @@ const calculator = () => {
   let validation = false;
 
   function getDataFoods() {
-    return axios("http://fabrica.inf.udec.cl:5001/alimentos").then(response =>
+    return axios("http://127.0.0.1:5000/request_alimentos").then(response =>
       setFoods(response.data)
     );
   }
@@ -108,11 +108,7 @@ const calculator = () => {
     setComponentResult(<CircularProgress />);
     setComplete(false);
     axios
-      .post("http://fabrica.inf.udec.cl:5001/calculadora", {
-        weight: weight,
-        amount: amount,
-        food: food,
-      })
+      .post("http://127.0.0.1:5000/calculadora", { weight: weight, amount: amount, food: food })
       .then(function (response) {
         // handle success
         console.log(response.data);
